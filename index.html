@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tushar Deshmukh - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #ff6b6b;
+            --accent-color: #4ecdc4;
+            --text-light: #333;
+            --text-dark: #f8f9fa;
+            --bg-light: #ffffff;
+            --bg-dark: #1a1a1a;
+            --card-light: #ffffff;
+            --card-dark: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        body.light-mode {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* Ensure all text is visible in both themes */
+        .light-mode * {
+            color: var(--text-light);
+        }
+
+        .dark-mode * {
+            color: var(--text-dark);
+        }
+
+        /* Override for specific elements that should keep their colors */
+        .hero-section,
+        .hero-section *,
+        .tech-card,
+        .tech-card *,
+        .achievement-item,
+        .achievement-item *,
+        .btn-custom,
+        .btn-custom *,
+        .social-links a,
+        .social-links a * {
+            color: white !important;
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .navbar {
+            background-color: rgba(26, 26, 26, 0.95) !important;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            padding: 8px 15px;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            margin-left: 15px;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Remove background pattern */
+        .hero-section::before {
+            display: none;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 0 10px 10px 0;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .section-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .light-mode .section-card {
+            background-color: var(--card-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .section-card {
+            background-color: var(--card-dark);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .light-mode .section-title {
+            color: var(--text-light);
+        }
+
+        .dark-mode .section-title {
+            color: var(--text-dark);
+        }
+
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease;
+        }
+
+        .light-mode .navbar-nav .nav-link {
+            color: var(--text-light) !important;
+        }
+
+        .dark-mode .navbar-nav .nav-link {
+            color: var(--text-dark) !important;
+        }
+
+        .light-mode .navbar-brand {
+            color: var(--text-light) !important;
+        }
+
+        .dark-mode .navbar-brand {
+            color: var(--text-dark) !important;
+        }
+
+        .skill-item {
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        .project-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .light-mode .project-card {
+            background-color: var(--card-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .project-card {
+            background-color: var(--card-dark);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.3);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 15px;
+            width: 1px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(to bottom, var(--primary-color), transparent);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .achievement-badge {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            color: white;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .tech-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tech-category {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .light-mode .tech-category {
+            background: rgba(108, 99, 255, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .dark-mode .tech-category {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-dark);
+        }
+
+        .light-mode .category-title {
+            color: var(--text-light);
+        }
+
+        .dark-mode .category-title {
+            color: var(--text-dark);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .proficiency-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .proficiency-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), white);
+            border-radius: 4px;
+            transition: width 2s ease-in-out;
+            width: 0;
+        }
+
+        .tech-card.animate .proficiency-fill {
+            width: var(--proficiency);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .profile-img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <div class="floating-shapes">
+        <div class="shape">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="currentColor" />
+            </svg>
+        </div>
+        <div class="shape">
+            <svg width="80" height="80" viewBox="0 0 100 100">
+                <rect x="25" y="25" width="50" height="50" fill="currentColor" />
+            </svg>
+        </div>
+        <div class="shape">
+            <svg width="120" height="120" viewBox="0 0 100 100">
+                <polygon points="50,15 85,85 15,85" fill="currentColor" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="fas fa-code me-2"></i>Tushar Deshmukh
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Tushar Deshmukh</h1>
+                        <p class="hero-subtitle">Enthusiastic Developer | AI/ML Enthusiast | Full Stack Developer</p>
+                        <p class="text-white-50 mb-4">Passionate about building smart, innovative solutions with a focus
+                            on creating impactful AI and data-driven applications</p>
+                        <div class="hero-buttons">
+                            <a href="#contact" class="btn-custom">
+                                <i class="fas fa-envelope me-2"></i>Get In Touch
+                            </a>
+                            <a href="#" class="btn-custom" onclick="downloadResume()">
+                                <i class="fas fa-download me-2"></i>Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center" data-aos="fade-left">
+                    <img src="tushar photo.png" alt="Tushar Deshmukh" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-card card p-4" data-aos="fade-up">
+                        <div class="card-body">
+                            <h3 class="mb-4">Education & Achievements</h3>
+                            <div class="timeline-item">
+                                <h5>B.Tech in Computer Engineering</h5>
+                                <p class="text-muted">Pillai College of Engineering, University of Mumbai (2022–2026)
+                                </p>
+                                <p><strong>CGPI: 9.90 / 10</strong> - <span class="text-success">Ranked First in First
+                                        Year</span></p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Higher Secondary Certificate (HSC)</h5>
+                                <p class="text-muted">Christ Academy, Koparkhairane | Maharashtra State Board
+                                    (2020–2021)</p>
+                                <p><strong>Percentage: 92.00%</strong></p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Secondary School Certificate (SSC)</h5>
+                                <p class="text-muted">R.F. Naik Vidyalaya and Junior College, Koparkhairane |
+                                    Maharashtra State Board (2018–2019)</p>
+                                <p><strong>Percentage: 90.20%</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="techstack" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Tech Stack</h2>
+
+            <!-- Programming Languages -->
+            <div class="tech-category" data-aos="fade-up">
+                <h3 class="category-title">
+                    <i class="fas fa-code me-2"></i>Programming Languages
+                </h3>
+                <div class="tech-grid">
+                    <div class="tech-card" data-proficiency="95">
+                        <i class="fab fa-python tech-icon"></i>
+                        <h5>Python</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="85">
+                        <i class="fab fa-java tech-icon"></i>
+                        <h5>Java</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="90">
+                        <i class="fab fa-js-square tech-icon"></i>
+                        <h5>JavaScript</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="80">
+                        <i class="fas fa-code tech-icon"></i>
+                        <h5>C++</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="75">
+                        <i class="fas fa-copyright tech-icon"></i>
+                        <h5>C</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend Technologies -->
+            <div class="tech-category" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="category-title">
+                    <i class="fas fa-palette me-2"></i>Frontend Technologies
+                </h3>
+                <div class="tech-grid">
+                    <div class="tech-card" data-proficiency="92">
+                        <i class="fab fa-react tech-icon"></i>
+                        <h5>React.js</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="95">
+                        <i class="fab fa-html5 tech-icon"></i>
+                        <h5>HTML5</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="90">
+                        <i class="fab fa-css3-alt tech-icon"></i>
+                        <h5>CSS3</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="88">
+                        <i class="fab fa-bootstrap tech-icon"></i>
+                        <h5>Bootstrap</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend Technologies -->
+            <div class="tech-category" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="category-title">
+                    <i class="fas fa-server me-2"></i>Backend Technologies
+                </h3>
+                <div class="tech-grid">
+                    <div class="tech-card" data-proficiency="90">
+                        <i class="fas fa-flask tech-icon"></i>
+                        <h5>Flask</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="75">
+                        <i class="fab fa-node-js tech-icon"></i>
+                        <h5>Node.js</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="85">
+                        <i class="fas fa-exchange-alt tech-icon"></i>
+                        <h5>REST APIs</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="tech-category" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="category-title">
+                    <i class="fas fa-brain me-2"></i>AI & Machine Learning
+                </h3>
+                <div class="tech-grid">
+                    <div class="tech-card" data-proficiency="88">
+                        <i class="fas fa-robot tech-icon"></i>
+                        <h5>Scikit-learn</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="92">
+                        <i class="fas fa-table tech-icon"></i>
+                        <h5>Pandas</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 92%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="85">
+                        <i class="fas fa-calculator tech-icon"></i>
+                        <h5>NumPy</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="80">
+                        <i class="fas fa-network-wired tech-icon"></i>
+                        <h5>TensorFlow</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Databases -->
+            <div class="tech-category" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="category-title">
+                    <i class="fas fa-database me-2"></i>Databases
+                </h3>
+                <div class="tech-grid">
+                    <div class="tech-card" data-proficiency="85">
+                        <i class="fas fa-database tech-icon"></i>
+                        <h5>MySQL</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="80">
+                        <i class="fas fa-leaf tech-icon"></i>
+                        <h5>MongoDB</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="88">
+                        <i class="fas fa-cube tech-icon"></i>
+                        <h5>SQLite3</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Platforms -->
+            <div class="tech-category" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="category-title">
+                    <i class="fas fa-tools me-2"></i>Tools & Platforms
+                </h3>
+                <div class="tech-grid">
+                    <div class="tech-card" data-proficiency="90">
+                        <i class="fab fa-git-alt tech-icon"></i>
+                        <h5>Git</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="85">
+                        <i class="fab fa-github tech-icon"></i>
+                        <h5>GitHub</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="82">
+                        <i class="fas fa-rocket tech-icon"></i>
+                        <h5>Postman</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 82%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="78">
+                        <i class="fas fa-chart-bar tech-icon"></i>
+                        <h5>PowerBI</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 78%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="75">
+                        <i class="fab fa-google tech-icon"></i>
+                        <h5>Google Cloud</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="tech-card" data-proficiency="85">
+                        <i class="fab fa-microsoft tech-icon"></i>
+                        <h5>MS Office</h5>
+                        <div class="proficiency-bar">
+                            <div class="proficiency-fill" style="--proficiency: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Skills & Technologies</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="section-card card p-4" data-aos="fade-up">
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h5 class="mb-3"><i class="fas fa-brain me-2"></i>AI & Machine Learning</h5>
+                                <div class="skills-container">
+                                    <span class="skill-item">Python</span>
+                                    <span class="skill-item">Scikit-learn</span>
+                                    <span class="skill-item">Pandas</span>
+                                    <span class="skill-item">NumPy</span>
+                                    <span class="skill-item">TensorFlow</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h5 class="mb-3"><i class="fas fa-code me-2"></i>Programming Languages</h5>
+                                <div class="skills-container">
+                                    <span class="skill-item">Python</span>
+                                    <span class="skill-item">Java</span>
+                                    <span class="skill-item">C++</span>
+                                    <span class="skill-item">C</span>
+                                    <span class="skill-item">JavaScript</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h5 class="mb-3"><i class="fas fa-palette me-2"></i>Frontend Technologies</h5>
+                                <div class="skills-container">
+                                    <span class="skill-item">React.js</span>
+                                    <span class="skill-item">HTML5</span>
+                                    <span class="skill-item">CSS3</span>
+                                    <span class="skill-item">JavaScript</span>
+                                    <span class="skill-item">Bootstrap</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h5 class="mb-3"><i class="fas fa-server me-2"></i>Backend Technologies</h5>
+                                <div class="skills-container">
+                                    <span class="skill-item">Flask</span>
+                                    <span class="skill-item">Node.js</span>
+                                    <span class="skill-item">REST APIs</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h5 class="mb-3"><i class="fas fa-database me-2"></i>Databases</h5>
+                                <div class="skills-container">
+                                    <span class="skill-item">MySQL</span>
+                                    <span class="skill-item">MongoDB</span>
+                                    <span class="skill-item">SQLite3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
+            <div class="row">
+
+                <!-- Facial Emotion Detection -->
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                    <div class="project-card card h-100">
+                        <img src="facial.png" alt="Facial Emotion Detection" class="project-img card-img-top">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Facial Emotion Detection</h5>
+                            <p class="card-text flex-grow-1">Advanced machine learning model for real-time facial
+                                emotion recognition using computer vision techniques.</p>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Tushar5758/Facial-Emotion-Detection" target="_blank"
+                                    class="btn-custom">
+                                    <i class="fab fa-github me-2"></i>View Project
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Freshcart E-commerce -->
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-card card h-100">
+                        <img src="freshcart.png"
+                            alt="Freshcart Ecommerce" class="project-img card-img-top">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Freshcart E-commerce Application</h5>
+                            <p class="card-text flex-grow-1">Full-stack e-commerce web application with modern UI/UX,
+                                shopping cart, and payment integration.</p>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Tushar5758/Freshcart-Ecommerce-Web-Application"
+                                    target="_blank" class="btn-custom">
+                                    <i class="fab fa-github me-2"></i>View Project
+                                </a>
+                                <a href="https://freshcart-tushar.netlify.app/" target="_blank" class="btn-custom">
+                                    <i class="fas fa-eye me-2"></i>Demo Available
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI-Powered Analytics Dashboard -->
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-card card h-100">
+                        <img src="dashboard.png"
+                            alt="AI Analytics Dashboard" class="project-img card-img-top">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">AI-Powered Analytics Dashboard</h5>
+                            <p class="card-text flex-grow-1">Interactive dashboard with AI-driven insights, data
+                                visualization, and real-time analytics.</p>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Tushar5758/AI-Powered-Analytics-Dashboard" target="_blank"
+                                    class="btn-custom">
+                                    <i class="fab fa-github me-2"></i>View Project
+                                </a>
+                                <a href="https://ai-powered-analytics-dashboard-two.vercel.app/" target="_blank"
+                                    class="btn-custom">
+                                    <i class="fas fa-eye me-2"></i>Demo Available
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exam AI -->
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-card card h-100">
+                        <img src="examai.png"
+                            alt="Exam AI" class="project-img card-img-top">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Exam AI - Smart Preparation Tool</h5>
+                            <p class="card-text flex-grow-1">AI-powered exam preparation platform using Gemini API for
+                                personalized study notes and quizzes.</p>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Tushar5758/project-b1-nlp" target="_blank"
+                                    class="btn-custom">
+                                    <i class="fab fa-github me-2"></i>View Project
+                                </a>
+                                <a href="https://ask.pce.ac.in/ask/genai/" target="_blank" class="btn-custom">
+                                    <i class="fas fa-eye me-2"></i>Demo Available
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- EV ChargeHub -->
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card card h-100">
+                        <img src="chargehub.png"
+                            alt="EV ChargeHub" class="project-img card-img-top">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">EV ChargeHub</h5>
+                            <p class="card-text flex-grow-1">Full-stack web application for EV charging station
+                                discovery with geolocation and interactive maps.</p>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Tushar5758/pce_comp_web_programming_lab_tushardeshmukh"
+                                    target="_blank" class="btn-custom">
+                                    <i class="fab fa-github me-2"></i>View Project
+                                </a>
+                                <a href="https://drive.google.com/file/d/1H7blRkJC2pruu5f0NgXwd6SPoT7WgYaq/view?usp=sharing"
+                                    target="_blank" class="btn-custom">
+                                    <i class="fas fa-eye me-2"></i>Demo Available
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- IPL Winner Prediction -->
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-card card h-100">
+                        <img src="ipl.png"
+                            alt="IPL Prediction" class="project-img card-img-top">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">IPL Winner Prediction System</h5>
+                            <p class="card-text flex-grow-1">Machine learning model predicting IPL match outcomes using
+                                historical data and team statistics.</p>
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Tushar5758/IPL-Win-Prediction" target="_blank"
+                                    class="btn-custom">
+                                    <i class="fab fa-github me-2"></i>View Project
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Professional Experience</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-card card p-4" data-aos="fade-up">
+                        <div class="card-body">
+                            <div class="timeline-item">
+                                <h5>Full Stack Project Intern</h5>
+                                <p class="text-muted">Pillai College of Engineering | Jan 2025 – June 2025</p>
+                                <p>Working on full-stack web applications using Flask, enhancing skills in Python Flask,
+                                    SQLite3, and Bootstrap-based UI development.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Full Stack Development Intern</h5>
+                                <p class="text-muted">Bharat Intern | May 2023 – June 2023</p>
+                                <p>Developed dynamic web applications using React.js and Flask with database
+                                    integration.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Python Development Intern</h5>
+                                <p class="text-muted">CODEPHINE | Jan 2023 – Feb 2023</p>
+                                <p>Created Python-based scripts and automation tools to solve real-world problems.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h5>Web Development Intern</h5>
+                                <p class="text-muted">Prodigy InfoTech | Jan 2023 – Feb 2023</p>
+                                <p>Built responsive and interactive web pages using HTML, CSS, and JavaScript.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Key Achievements & Certifications</h2>
+            <div class="row">
+
+                <!-- First Rank Achievement -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up">
+                    <div class="achievement-badge">
+                        <i class="fas fa-trophy mb-2" style="font-size: 2rem;"></i>
+                        <h5>First Rank Achievement</h5>
+                        <p class="mb-0">Ranked First in First Year Computer Engineering at Pillai College of Engineering
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Smart India Hackathon -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="achievement-badge">
+                        <i class="fas fa-code mb-2" style="font-size: 2rem;"></i>
+                        <h5>Smart India Hackathon</h5>
+                        <p class="mb-0">Participated in SIH 2024 & 2023, contributing to innovative tech solutions</p>
+                    </div>
+                </div>
+
+                <!-- Google Cloud Skills -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="achievement-badge">
+                        <i class="fas fa-cloud mb-2" style="font-size: 2rem;"></i>
+                        <h5>Google Cloud Skills</h5>
+                        <p class="mb-0">Engaged in Google Cloud Skill Boost Activities for cloud computing expertise</p>
+                    </div>
+                </div>
+
+                <!-- Multiple Certifications -->
+                <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="achievement-badge">
+                        <i class="fas fa-certificate mb-2" style="font-size: 2rem;"></i>
+                        <h5>Multiple Certifications</h5>
+                        <p class="mb-0">
+                            Certified in AI/ML, React.js, Python,<br>
+                            PowerBI, and API Development
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Certifications Detail -->
+    <div class="row mt-4">
+        <div class="col-lg-10 mx-auto">
+            <div class="section-card card p-4" data-aos="fade-up">
+                <div class="card-body">
+                    <h4 class="mb-4">Certifications</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">Data Analysis using Python on Astronomical Data</h6>
+                                    <small class="text-muted">Technical training certificate</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">AI-Powered Dashboard Development using PowerBI</h6>
+                                    <small class="text-muted">OfficeMaster Workshop</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">Artificial Intelligence and Machine Learning</h6>
+                                    <small class="text-muted">be10x Course Completion</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">React.js Certification Course</h6>
+                                    <small class="text-muted">Frontend Development</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">Postman API Fundamentals Student Expert</h6>
+                                    <small class="text-muted">API Development & Testing</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">Programming Using Python</h6>
+                                    <small class="text-muted">Python Programming Basics</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="section-card card p-4" data-aos="fade-up">
+                        <div class="card-body text-center">
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h5>Email</h5>
+                                    <p><a href="mailto:tushardeshmukh578@gmail.com"
+                                            class="text-decoration-none">tushardeshmukh578@gmail.com</a></p>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <h5>Phone</h5>
+                                    <p><a href="tel:+919594424975" class="text-decoration-none">+91 9594424975</a></p>
+                                </div>
+                                <div class="col-md-4 mb-4">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <h5>Location</h5>
+                                    <p>Ambarnath, Maharashtra, India</p>
+                                </div>
+                            </div>
+                            <div class="social-links mt-4">
+                                <a href="https://linkedin.com/in/tushar-deshmukh-b08351283" target="_blank"
+                                    aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/Tushar5758" target="_blank" aria-label="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="mailto:tushardeshmukh578@gmail.com" aria-label="Email">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                <a href="tel:+919594424975" aria-label="Phone">
+                                    <i class="fas fa-phone"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 Tushar Deshmukh. | Built with passion and code ❤️</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (savedTheme === 'dark') {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Download Resume Function
+        function downloadResume() {
+            window.open('https://drive.google.com/file/d/1Ihp32S9lfRd3NA5G5iYZma4b-8aMKf5Z/view?usp=sharing', '_blank');
+        }
+
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backdropFilter = 'blur(20px)';
+            } else {
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Load theme on page load
+        document.addEventListener('DOMContentLoaded', loadTheme);
+
+        // Typing effect for hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', function () {
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.textContent;
+            setTimeout(() => {
+                typeWriter(heroTitle, originalText, 150);
+            }, 500);
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero-section');
+            const speed = scrolled * 0.5;
+
+            parallaxElements.forEach(element => {
+                element.style.transform = `translateY(${speed}px)`;
+            });
+        });
+
+        // Add hover effect to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Animated counter for achievements
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+
+            function timer() {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                } else {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(timer);
+                }
+            }
+            timer();
+        }
+
+        // Animate tech stack proficiency bars when they come into view
+        const techStackObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const techCards = entry.target.querySelectorAll('.tech-card');
+                    techCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('animate');
+                        }, index * 100);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.tech-category').forEach(category => {
+            techStackObserver.observe(category);
+        });
+
+        // Add floating animation to shapes
+        function floatingAnimation() {
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const randomDelay = Math.random() * 2000;
+                const randomDuration = 3000 + Math.random() * 2000;
+
+                setTimeout(() => {
+                    shape.style.animation = `float ${randomDuration}ms ease-in-out infinite`;
+                }, randomDelay);
+            });
+        }
+
+        // Initialize floating animation
+        floatingAnimation();
+
+        // Add loading animation
+        window.addEventListener('load', function () {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add interactive cursor effect (optional)
+        document.addEventListener('mousemove', function (e) {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: var(--primary-color);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    opacity: 0.7;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+
+            const cursor_element = document.querySelector('.cursor');
+            cursor_element.style.left = e.clientX - 10 + 'px';
+            cursor_element.style.top = e.clientY - 10 + 'px';
+        });
+    </script>
+</body>
+
+</html>
