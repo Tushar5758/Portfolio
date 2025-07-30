@@ -6,7 +6,7 @@ This portfolio showcases my projects, skills, achievements, and experiences in w
 ## Live Portfolio
 
 Check out my live portfolio here:  
-[https://your-portfolio-link.com](https://your-portfolio-link.com)
+[https://portfolio-szr9.vercel.app/](https://portfolio-szr9.vercel.app/)
 
 ## About Me
 
